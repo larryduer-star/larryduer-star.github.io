@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tesla auth callback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+    code { word-break: break-all; background: #f4f4f4; padding: 0.2rem 0.4rem; }
+    #code { display: block; margin-top: 1rem; padding: 1rem; background: #111; color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>Auth callback</h1>
+  <p>Copy the code below and paste it back into chat with Tesla Bot.</p>
+  <code id="code">waiting…</code>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const err = params.get("error");
+    const el = document.getElementById("code");
+    if (err) {
+      el.textContent = "Error: " + err + " " + (params.get("error_description") || "");
+    } else if (code) {
+      el.textContent = code;
+    } else {
+      el.textContent = "No code in URL. Full query: " + window.location.search;
+    }
+  </script>
+</body>
+</html>
